@@ -112,7 +112,7 @@ def main():
     
     title = pygame.font.SysFont("arial", 28).render("PokeWordle", True, (255,255,255))
     title_rect = title.get_rect(center=(WIDTH // 2, 40))
-    header = pygame.font.SysFont("arial", 18).render("gotta guess them all", True, (175,175,175))
+    header = pygame.font.SysFont("arial", 18).render("gotta guess 'em all", True, (175,175,175))
     header_rect = header.get_rect(center=(WIDTH // 2, 70))
     stats = pygame.font.SysFont("arial", 18).render("\n".join(f"in {i} guesses: {count}" for i, count in enumerate(wins[:6], start=1)) + f"\nlosses: {losses}", True, (175,175,175))
     stats_rect = stats.get_rect(center=(WIDTH - 50, 80))
