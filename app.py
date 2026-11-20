@@ -201,7 +201,8 @@ while running:
         screen.blit(text, text_rect)
         pokemon_list = fetch_pokemon_list(name_length)
         wipe_game()
-        fetching = False
+        if len(pokemon_list) > 0:
+            fetching = False
     else:
         main()
 
