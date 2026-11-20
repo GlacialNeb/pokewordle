@@ -36,6 +36,8 @@ WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("PokeWordle")
 clock = pygame.time.Clock()
+title_font = pygame.font.SysFont("arial", 28)
+subtitle_font = pygame.font.SysFont("arial", 18)
 
 running = True
 fetching = True
@@ -110,13 +112,13 @@ def wipe_game():
 def main():
     global name_length, length_debounce, fetching
     
-    title = pygame.font.SysFont("arial", 28).render("PokeWordle", True, (255,255,255))
+    title = title_font.render("PokeWordle", True, (255,255,255))
     title_rect = title.get_rect(center=(WIDTH // 2, 40))
-    header = pygame.font.SysFont("arial", 18).render("gotta guess 'em all", True, (175,175,175))
+    header = subtitle_font.render("gotta guess 'em all", True, (175,175,175))
     header_rect = header.get_rect(center=(WIDTH // 2, 70))
-    stats = pygame.font.SysFont("arial", 18).render("\n".join(f"in {i} guesses: {count}" for i, count in enumerate(wins[:6], start=1)) + f"\nlosses: {losses}", True, (175,175,175))
+    stats = subtitle_font.render("\n".join(f"in {i} guesses: {count}" for i, count in enumerate(wins[:6], start=1)) + f"\nlosses: {losses}", True, (175,175,175))
     stats_rect = stats.get_rect(center=(WIDTH - 50, 80))
-    length = pygame.font.SysFont("arial", 18).render(f"length: {name_length}", True, (175,175,175))
+    length = subtitle_font.render(f"length: {name_length}", True, (175,175,175))
     length_rect = length.get_rect(center=(WIDTH // 2, 450))
 
     screen.blit(title, title_rect)
@@ -141,7 +143,7 @@ def main():
         length_debounce = False
 
     if reset:
-        title = pygame.font.SysFont("arial", 18).render(f"the pokemon was {answer}", True, (175,175,175))
+        title = subtitle_font.render(f"the pokemon was {answer}", True, (175,175,175))
         title_rect = title.get_rect(center=(WIDTH // 2, 500))
         screen.blit(title, title_rect)
         reset_button = Button(WIDTH // 2 - 50, 530, 100, 40, "Play Again")
@@ -164,7 +166,7 @@ def main():
             bound = 50
             pygame.draw.rect(screen, color, (x, y, bound, bound), 0)
             pygame.draw.rect(screen, (175,175,175), (x, y, bound, bound), 2)
-            text = pygame.font.SysFont("arial", 28).render(letter.upper(), True, (255,255,255))
+            text = title_font.render(letter.upper(), True, (255,255,255))
             text_rect = text.get_rect(center=(x + bound // 2, y + bound // 2))
             screen.blit(text, text_rect)
             
@@ -196,7 +198,7 @@ while running:
     screen.fill((30,30,30))
 
     if fetching:
-        text = pygame.font.SysFont("arial", 28).render("fetching pokemon...", True, (175,175,175))
+        text = title_font.render("fetching pokemon...", True, (175,175,175))
         text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 40))
         screen.blit(text, text_rect)
         pokemon_list = fetch_pokemon_list(name_length)
